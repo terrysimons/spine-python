@@ -37,9 +37,8 @@ class Skin(object):
     def attachAll(self, skeleton, oldSkin):
         for key, attachment in self.attachments.iteritems():
             slot = skeleton.slots[key.slotIndex]
-            print("NB: This might not work right.")
-            if slot.attachment == attachment:
+            if skeleton.slots[key.slotIndex].attachment == attachment:
                 newAttachment = self.getAttachment(key.slotIndex, key.name)
                 if newAttachment:
-                    slot.setAttachment(newAttachment)
+                    skeleton.slots[key.slotIndex].setAttachment(newAttachment)
             

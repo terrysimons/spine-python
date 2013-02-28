@@ -23,26 +23,28 @@ class Slot(object):
         
     def setAttachment(self, attachment):
         self.attachment = attachment
+        self.attachmentTime = self.skeleton.time
 
 
     def setAttachmentTime(self, time):
         self.attachmentTime = self.skeleton.time - time
 
 
-    def getAttachmentTime(self, ):
+    def getAttachmentTime(self):
         return self.skeleton.time - self.attachmentTime
 
     
-    def setToBindPose(self, ):
-        for slotEnumerator in enumerate(self.skeleton.data.slots):
-            if self.data == slotEnumerator[1]:
-                self.setToBindPoseWithIndex(slotEnumerator[0])
+    def setToBindPose(self):
+        for i, slot in enumerate(self.skeleton.data.slots):
+            if self.data == slot:
+                self.setToBindPoseWithIndex(i)
+
 
     def setToBindPoseWithIndex(self, slotIndex):
         self.r = self.data.r
         self.g = self.data.g
         self.b = self.data.b
         self.a = self.data.a
-        self.setAttachment(self.skeleton.getAttachmentByIndex(slotIndex, self.data.attachmentName) if self.data.attachmentName else 0)
+        self.setAttachment(self.skeleton.getAttachmentByIndex(slotIndex, self.data.attachmentName) if self.data.attachmentName else None)
     
     

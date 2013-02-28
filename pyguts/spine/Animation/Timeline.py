@@ -282,13 +282,12 @@ class ColorTimeline(CurveTimeline):
 
 
     def setKeyframe(self, keyframeIndex, time, r, g, b, a):
-        pass
-        #keyframeIndex += 5
-        #self.frames[keyframeIndex] = time
-        #self.frames[keyframeIndex + 1] = r
-        #self.frames[keyframeIndex + 2] = g
-        #self.frames[keyframeIndex + 3] = b
-        #self.frames[keyframeIndex + 4] = a
+        keyframeIndex *= 5
+        self.frames[keyframeIndex] = time
+        self.frames[keyframeIndex + 1] = r
+        self.frames[keyframeIndex + 1] = g
+        self.frames[keyframeIndex + 1] = b
+        self.frames[keyframeIndex + 1] = a
 
 
     def apply(self, skeleton, time, alpha):
@@ -320,10 +319,10 @@ class ColorTimeline(CurveTimeline):
             percent = 1.0
         percent = self.getCurvePercent(frameIndex / 5 - 1, percent)
 
-        r = lastFrameR (self.frames[frameIndex + COLOR_FRAME_R] - lastFrameR) * percent
-        g = lastFrameG (self.frames[frameIndex + COLOR_FRAME_G] - lastFrameG) * percent
-        b = lastFrameB (self.frames[frameIndex + COLOR_FRAME_B] - lastFrameB) * percent
-        a = lastFrameA (self.frames[frameIndex + COLOR_FRAME_A] - lastFrameA) * percent
+        r = lastFrameR + (self.frames[frameIndex + COLOR_FRAME_R] - lastFrameR) * percent
+        g = lastFrameG + (self.frames[frameIndex + COLOR_FRAME_G] - lastFrameG) * percent
+        b = lastFrameB + (self.frames[frameIndex + COLOR_FRAME_B] - lastFrameB) * percent
+        a = lastFrameA + (self.frames[frameIndex + COLOR_FRAME_A] - lastFrameA) * percent
         if alpha < 1.0:
             slot.r += (r - slot.r) * alpha
             slot.g += (g - slot.g) * alpha

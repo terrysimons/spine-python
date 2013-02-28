@@ -8,10 +8,6 @@ import AttachmentLoader
 
 import Animation
 
-def toColor(value, index):
-    if len(value) != 8:
-        raise Exception("Error parsing color, length must be 8: %s" + value)    
-    return 0
 
 def readCurve(timeline, keyframeIndex, valueMap):
     try:
@@ -79,10 +75,10 @@ class SkeletonJson(object):
             
             if 'color' in slotMap:
                 s = slotMap['color']
-                slotData.r = toColor(s, 0)
-                slotData.g = toColor(s, 1)
-                slotData.b = toColor(s, 2)
-                slotData.a = toColor(s, 3)
+                slotData.r = int(slotMap['color'][0:2], 16)
+                slotData.g = int(slotMap['color'][2:4], 16)
+                slotData.b = int(slotMap['color'][4:6], 16)
+                slotData.a = int(slotMap['color'][6:8], 16)
 
             if 'attachment' in slotMap:
                 slotData.attachmentName = slotMap['attachment']
@@ -218,13 +214,12 @@ class SkeletonJson(object):
                     
                     keyframeIndex = 0
                     for valueMap in values:
-                        s = valueMap['color']
                         timeline.setKeyframe(keyframeIndex, 
                                              valueMap['time'], 
-                                             toColor(s, 0), 
-                                             toColor(s, 1), 
-                                             toColor(s, 2), 
-                                             toColor(s, 3))
+                                             int(valueMap['color'][0:2], 16),
+                                             int(valueMap['color'][2:4], 16),
+                                             int(valueMap['color'][4:6], 16),
+                                             int(valueMap['color'][6:8], 16))
                         timeline = readCurve(timeline, keyframeIndex, valueMap)
                         keyframeIndex += 1
                     timelines.append(timeline)
