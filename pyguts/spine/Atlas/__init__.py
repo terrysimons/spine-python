@@ -115,6 +115,10 @@ class Atlas(object):
                         value = value.split(',')
                         _page[key] = [x.strip().rstrip() for x in value]                    
                     else:
+                        if value == 'false':
+                            value = False
+                        elif value == 'true':
+                            value = True
                         _page[key] = value
                     if key == 'repeat':
                         page = self.newAtlasPage(_page['name'])                                                 
@@ -130,7 +134,9 @@ class Atlas(object):
                         elif _page['repeat'] == 'xy':
                             page.uWrap = TextureWrap.repeat
                             page.vWrap = TextureWrap.repeat
+                        #print('Page: ')
                         #import pprint; pprint.pprint(_page)
+                        #print('Page Dict: ')
                         #import pprint; pprint.pprint(page.__dict__)
                         self.pages.append(page)
             else:                
@@ -145,6 +151,10 @@ class Atlas(object):
                         value = value.split(',')
                         _region[key] = [int(x.strip().rstrip()) for x in value]
                     else:
+                        if value == 'false':
+                            value = False
+                        elif value == 'true':
+                            value = True
                         _region[key] = value
                     if key == 'index':
                         region = self.newAtlasRegion(page)
@@ -168,8 +178,10 @@ class Atlas(object):
                         region.offsetX = _region['offset'][0]
                         region.offsetY = _region['offset'][1]
                         region.index = int(_region['index'])
+                        #print('Region: ')
                         #import pprint; pprint.pprint(_region)
-                        #import pprint; pprint.pprint(region.__dict__)
+#                        print('Region Dict: ')
+#                        import pprint; pprint.pprint(region.__dict__)
                         self.regions.append(region)
                         _region = {}
                         continue
