@@ -28,11 +28,11 @@ class Bone(object):
 
     def updateWorldTransform(self, flipX, flipY):
         if self.parent:
-            self.worldX = self.x * self.parent.m00 + self.y * self.parent.m01 + self.parent.worldX
+            self.worldX = self.x * self.parent.m00 + self.y * self.parent.m01 + self.parent.worldX 
             self.worldY = self.x * self.parent.m10 + self.y * self.parent.m11 + self.parent.worldY
             self.worldScaleX = self.parent.worldScaleX * self.scaleX
             self.worldScaleY = self.parent.worldScaleY * self.scaleY
-            self.worldRotation = self.parent.rotation
+            self.worldRotation = self.parent.rotation + self.rotation
         else:
             self.worldX = self.x
             self.worldY = self.y
@@ -40,7 +40,7 @@ class Bone(object):
             self.worldScaleY = self.scaleY
             self.worldRotation = self.rotation
 
-        radians = self.worldRotation * math.pi / 180
+        radians = self.worldRotation * math.pi / 180.0
         cos = math.cos(radians)
         sin = math.sin(radians)
         self.m00 = cos * self.worldScaleX
