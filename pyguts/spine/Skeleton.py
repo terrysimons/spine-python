@@ -70,6 +70,11 @@ class Skeleton(object):
             return self.bones[0]
         return None
 
+    def setRootBone(self, bone):
+        if len(self.bones):
+            self.bones[0] = bone
+    
+
     
     def findBone(self, boneName):
         for i in range(len(self.bones)):
