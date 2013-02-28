@@ -29,7 +29,7 @@ class RegionAttachment(Attachment.Attachment):
         localY = -localY2
         localX *= self.scaleX
         localY *= self.scaleY
-        radians = self.rotation * math.pi / 180.0
+        radians = math.radians(self.rotation)
         cos = math.cos(radians)
         sin = math.sin(radians)
         localXCos = localX * cos + self.x
