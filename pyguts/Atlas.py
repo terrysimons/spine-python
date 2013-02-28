@@ -26,7 +26,7 @@ class Atlas(spine.Atlas):
 
     def newAtlasPage(self, name):
         page = AtlasPage()
-        page.texture = pygame.image.load(os.path.realpath(name)).convert()
+        page.texture = pygame.image.load(os.path.realpath(name)).convert_alpha()
         return page
 
 
