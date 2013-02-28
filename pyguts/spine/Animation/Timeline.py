@@ -136,7 +136,8 @@ class RotateTimeline(CurveTimeline):
             while amount < -180:
                 amount += 360
             bone.rotation += amount * alpha
-            skeleton.bones[self.boneIndex] = bone
+            skeleton.bones[self.boneIndex] = bone            
+            #import pprint; pprint.pprint(bone.__dict__)
             return
 
         # Interpolate between the last frame and the current frame
@@ -161,6 +162,7 @@ class RotateTimeline(CurveTimeline):
         while amount < -180:
             amount += 360
 
+        #import pprint; pprint.pprint(bone.__dict__)
         skeleton.bones[self.boneIndex] = bone
         return 
 
