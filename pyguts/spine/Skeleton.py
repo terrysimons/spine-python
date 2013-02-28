@@ -5,15 +5,15 @@ class Skeleton(object):
     def __init__(self, data):
         super(Skeleton, self).__init__()
         self.data = data
+        self.skin = None
+        self.r = 1.0
+        self.g = 1.0
+        self.b = 1.0
+        self.a = 1.0
+        self.time = 0.0
         self.bones = []
         self.slots = []
         self.drawOrder = []
-        self.skin = None
-        self.r = 0.0
-        self.g = 0.0
-        self.b = 0.0
-        self.a = 0.0
-        self.time = 0.0
         self.flipX = False
         self.flipY = False
 
@@ -42,12 +42,11 @@ class Skeleton(object):
             slot = Slot(data=slotData, skeleton=self, bone=bone)
             self.slots.append(slot)
             self.drawOrder.append(slot)
-            
-
+    
     
     def updateWorldTransform(self):
-        for bone in self.bones:
-            bone.updateWorldTransform(self.flipX, self.flipY)
+        for i in range(len(self.bones)):
+            self.bones[i].updateWorldTransform(self.flipX, self.flipY)
 
     
     def setToBindPose(self):
@@ -56,8 +55,8 @@ class Skeleton(object):
 
     
     def setBonesToBindPose(self):
-        for bone in self.bones:
-            bone.setToBindPose()
+        for i in range(len(self.bones)):
+            self.bones[i].setToBindPose()
 
     
     def setSlotsToBindPose(self):
@@ -74,7 +73,6 @@ class Skeleton(object):
         if len(self.bones):
             self.bones[0] = bone
     
-
     
     def findBone(self, boneName):
         for i in range(len(self.bones)):
@@ -94,7 +92,7 @@ class Skeleton(object):
         for i in range(len(self.slots)):
             if self.data.slots[i].name == slotName:
                 return self.slots[i]
-            return None
+        return None
 
 
     def findSlotIndex(self, slotName):
@@ -133,8 +131,7 @@ class Skeleton(object):
 
     def setAttachment(self, slotName, attachmentName):
         for i in range(len(self.slots)):
-            slot = self.slots[i]
-            if slot.data.name == slotName:
-                slot.setAttachment(self.getAttachmentByIndex(i, attachmentName))
+            if self.slots[i].data.name == slotName:
+                self.slots[i].setAttachment(self.getAttachmentByIndex(i, attachmentName))
                 return
         raise Exception('Slot not found: %s' % slotName)
