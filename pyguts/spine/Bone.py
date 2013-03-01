@@ -11,6 +11,8 @@ class Bone(object):
         self.scaleY = data.scaleY
         self.m00 = 0.0
         self.m01 = 0.0
+        self.m10 = 0.0
+        self.m11 = 0.0
         self.worldX = 0.0
         self.worldY = 0.0
         self.worldRotation = 0.0
@@ -49,15 +51,13 @@ class Bone(object):
         self.m11 = cos * self.worldScaleY
 
         if flipX:
-            self.m00 = -self.m00
-            self.m01 = -self.m01
+            self.m00 = -self.m00 if self.m00 != 0.0 else 0.0
+            self.m01 = -self.m01 if self.m01 != 0.0 else 0.0
         if flipY:
-            self.m10 = -self.m10
-            self.m11 = -self.m11
-        
-            
+            self.m10 = -self.m10 if self.m10 != 0.0 else 0.0
+            self.m11 = -self.m11 if self.m11 != 0.0 else 0.0
         # The C++ runtime has this, but Corona doesn't.
         #if self.data.flipY:
-        #    self.m10 = -self.m10
-        #    self.m11 = -self.m11
+        #    self.m10 = -self.m10 if self.m10 != 0.0 else 0.0
+        #    self.m11 = -self.m11 if self.m11 != 0.0 else 0.0
         
