@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
 
     skeleton.flipX = False
-    skeleton.flipY = True
+    skeleton.flipY = False
     skeleton.setToBindPose()
     rootBone = skeleton.getRootBone()
     rootBone.x = 320
@@ -48,16 +48,6 @@ if __name__ == '__main__':
 
     while not done:
         clock.tick(60)
-        #for event in pygame.event.get():
-        #    if event.type == pygame.QUIT:
-        #        done = True
-        #    if event.type == pygame.KEYDOWN:
-        #        if event.key == pygame.K_ESCAPE:
-        #            done = True
-
-        #keystate = pygame.key.get_pressed()
-        
-        #if keystate[pygame.K_SPACE]:
         animationTime += clock.get_time() / 1000.0                
         animation.apply(skeleton=skeleton,
                         time=animationTime,
