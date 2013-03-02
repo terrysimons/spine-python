@@ -4,8 +4,6 @@ import os
 
 import pygame
 
-import pyguts as spine
-
 if __name__ == '__main__':
     pygame.init()
 
@@ -18,7 +16,6 @@ if __name__ == '__main__':
 
     done = False
 
-    rootBone = spine.Bone.Bone()
 
     slot = {}
     slot['x'] = 320
