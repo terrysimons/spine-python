@@ -6,3 +6,5 @@
 *.py~
 
 *.py#
+
+pycallgraph.png
