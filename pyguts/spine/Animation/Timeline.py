@@ -160,6 +160,7 @@ class RotateTimeline(CurveTimeline):
             amount -= 360
         while amount < -180:
             amount += 360
+        bone.rotation = bone.rotation + amount * alpha
         return 
 
 
@@ -327,7 +328,6 @@ class ColorTimeline(CurveTimeline):
             slot.g = g
             slot.b = b
             slot.a = a
-
         return 
 
 
