@@ -2,6 +2,7 @@ import math
 
 class Bone(object):
     def __init__(self, data):
+        super(Bone, self).__init__()
         self.data = data
         self.parent = None
         self.x = data.x
@@ -18,6 +19,8 @@ class Bone(object):
         self.worldRotation = 0.0
         self.worldScaleX = 0.0
         self.worldScaleY = 0.0
+        self.line = None
+        self.circle = None
         
 
     def setToBindPose(self):
@@ -34,7 +37,7 @@ class Bone(object):
             self.worldY = self.x * self.parent.m10 + self.y * self.parent.m11 + self.parent.worldY
             self.worldScaleX = self.parent.worldScaleX * self.scaleX
             self.worldScaleY = self.parent.worldScaleY * self.scaleY
-            self.worldRotation = self.parent.rotation + self.rotation
+            self.worldRotation = self.parent.worldRotation + self.rotation
         else:
             self.worldX = self.x
             self.worldY = self.y
@@ -51,11 +54,11 @@ class Bone(object):
         self.m11 = cos * self.worldScaleY
 
         if flipX:
-            self.m00 = -self.m00 if self.m00 != 0.0 else 0.0
-            self.m01 = -self.m01 if self.m01 != 0.0 else 0.0
+            self.m00 = -self.m00 
+            self.m01 = -self.m01 
         if flipY:
-            self.m10 = -self.m10 if self.m10 != 0.0 else 0.0
-            self.m11 = -self.m11 if self.m11 != 0.0 else 0.0
+            self.m10 = -self.m10 
+            self.m11 = -self.m11 
         # The C++ runtime has this, but Corona doesn't.
         #if self.data.flipY:
         #    self.m10 = -self.m10 if self.m10 != 0.0 else 0.0
