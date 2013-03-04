@@ -2,9 +2,9 @@ from Bone import Bone
 from Slot import Slot
 
 class Skeleton(object):
-    def __init__(self, data):
+    def __init__(self, skeletonData):
         super(Skeleton, self).__init__()
-        self.data = data
+        self.data = skeletonData
         self.skin = None
         self.r = 1.0
         self.g = 1.0
@@ -17,30 +17,32 @@ class Skeleton(object):
         self.flipX = False
         self.flipY = False
 
-        if not data:
-            raise Exception('data can not be null.')
+        if not self.data:
+            raise Exception('skeletonData can not be null.')
 
-        boneCount = len(data.bones)
+        boneCount = len(self.data.bones)
+        self.bones = [None] * boneCount
         for i in range(boneCount):
-            boneData = data.bones[i]
+            boneData = self.data.bones[i]
             bone = Bone(data=boneData)
             if boneData.parent:
                 for ii in range(boneCount):
-                    if data.bones[ii] == boneData.parent:
+                    if self.data.bones[ii] == boneData.parent:
                         bone.parent = self.bones[ii]
                         break
-            self.bones.append(bone)
+            self.bones[i] = bone
 
-        slotCount = len(data.slots)
+        slotCount = len(self.data.slots)
+        self.slots = [None] * slotCount
         for i in range(slotCount):
-            slotData = data.slots[i]
+            slotData = self.data.slots[i]
             bone = None
             for ii in range(boneCount):
-                if data.bones[ii] == slotData.boneData:
+                if self.data.bones[ii] == slotData.boneData:
                     bone = self.bones[ii]
                     break
             slot = Slot(data=slotData, skeleton=self, bone=bone)
-            self.slots.append(slot)
+            self.slots[i] = slot
             self.drawOrder.append(slot)
     
     

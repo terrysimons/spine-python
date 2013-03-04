@@ -1,0 +1,42 @@
+{
+"bones": [
+	{ "name": "root", "length": 0 },
+	{ "name": "top left", "parent": "root", "length": 10.0, "x": -10.0, "y": 10.0 },
+	{ "name": "top left child", "parent": "top left", "length": 10.0, "x": 0.0, "y": 10.0 },
+	{ "name": "top left child child", "parent": "top left child", "length": 10.0, "x": -10.0, "y": 0.0 },
+	{ "name": "top right", "parent": "root", "length": 10.0, "x": 10.0, "y": 10.0 },
+	{ "name": "top right child", "parent": "top right", "length": 10.0, "x": 0.0, "y": 10.0 },
+	{ "name": "top right child child", "parent": "top right child", "length": 10.0, "x": 10.0, "y": 0.0 },
+	{ "name": "bottom right", "parent": "root", "length": 10.0, "x": 10.0, "y": -10.0 },
+	{ "name": "bottom right child", "parent": "bottom right", "length": 10.0, "x": 0.0, "y": -10.0 },
+	{ "name": "bottom right child child", "parent": "bottom right child", "length": 10.0, "x": 10.0, "y": 0.0 },
+	{ "name": "bottom left", "parent": "root", "length": 10.0, "x": -10.0, "y": -10.0 },
+	{ "name": "bottom left child", "parent": "bottom left", "length": 10.0, "x": 0.0, "y": -10.0 },
+	{ "name": "bottom left child child", "parent": "bottom left child", "length": 10.0, "x": -10.0, "y": 0.0 }
+],
+"slots": [
+	{ "name": "template", "bone": "root", "color": "ff898c86" },
+	{ "name": "top left", "bone": "top left", "attachment": "top-left" },
+	{ "name": "top left child", "bone": "top left child", "attachment": "top-left" },
+	{ "name": "top left child child", "bone": "top left child child", "attachment": "top-left" },
+	{ "name": "top right", "bone": "top right", "attachment": "top-right" },
+	{ "name": "top right child", "bone": "top right child", "attachment": "top-left" },
+	{ "name": "top right child child", "bone": "top right child child", "attachment": "top-left" },
+	{ "name": "bottom right", "bone": "bottom right", "attachment": "bottom-right" },
+	{ "name": "bottom right child", "bone": "bottom right child", "attachment": "top-left" },
+	{ "name": "bottom right child child", "bone": "bottom right child child", "attachment": "top-left" },
+	{ "name": "bottom left", "bone": "bottom left", "attachment": "bottom-left" },
+	{ "name": "bottom left child", "bone": "bottom left child", "attachment": "top-left" },
+	{ "name": "bottom left child child", "bone": "bottom left child child", "attachment": "top-left" }
+],
+"skins": {
+	"default": {
+		"top left": {
+			"top-left": { "x": 26.12, "y": -1.85, "rotation": 89.09, "width": 33, "height": 67 },
+			"top-right": { "x": 26.12, "y": -1.85, "rotation": 89.09, "width": 33, "height": 67 },
+			"bottom-right": { "x": 26.12, "y": -1.85, "rotation": 89.09, "width": 33, "height": 67 },
+			"bottom-left": { "x": 26.12, "y": -1.85, "rotation": 89.09, "width": 33, "height": 67 }
+		}
+	}
+}
+}

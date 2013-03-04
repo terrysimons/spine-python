@@ -19,27 +19,30 @@ if __name__ == '__main__':
     atlasFile = os.path.realpath('./data/spineboy.atlas')
     atlas = spine.Atlas(file=atlasFile)
 
+    #atlasFile = os.path.realpath('./data/test.atlas')
+    #atlas = spine.Atlas(file=atlasFile)
+
     skeletonJson = spine.SkeletonJson(spine.AtlasAttachmentLoader(atlas))
 
     skeletonFile = os.path.realpath('./data/spineboy-skeleton.json')
     skeletonData = skeletonJson.readSkeletonData(skeletonFile)
 
+    #skeletonFile = os.path.realpath('./data/test.json')
+    #skeletonData = skeletonJson.readSkeletonData(skeletonFile)
+
     animationFile = os.path.realpath('./data/spineboy-walk.json')
     animation = skeletonJson.readAnimation(file=animationFile, 
                                            skeletonData=skeletonData)       
 
-    skeleton = spine.Skeleton(data=skeletonData)
+    skeleton = spine.Skeleton(skeletonData=skeletonData)
+    skeleton.debug = True
 
-
+    skeleton.x = 320
+    skeleton.y = 400
     skeleton.flipX = False
     skeleton.flipY = False
     skeleton.setToBindPose()
-    rootBone = skeleton.getRootBone()
-    rootBone.x = 320
-    rootBone.y = 240
-    skeleton.setRootBone(rootBone)
     skeleton.updateWorldTransform()
-
 
     clock = pygame.time.Clock()    
     animationTime = 0.0

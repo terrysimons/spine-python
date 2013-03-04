@@ -8,3 +8,7 @@
 *.py#
 
 pycallgraph.png
+
+*.atlas~
+
+*.json~

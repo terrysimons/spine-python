@@ -32,6 +32,8 @@ class RegionAttachment(spine.RegionAttachment):
         self.v2 = self.v + region.height
         self.rect = pygame.Rect((self.u, self.v, region.width, region.height))
         self.texture = region.page.texture.subsurface(self.rect)
+        self.offset = pygame.Rect(0, 0, region.width, region.height)
+        self.offset.center = (region.width / 2, region.height / 2)
         if region.rotate:
             self.verticies[1].texCoords.x = self.u
             self.verticies[1].texCoords.y = self.v2

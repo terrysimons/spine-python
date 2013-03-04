@@ -18,7 +18,8 @@ class Slot(object):
         if not self.bone:
             raise Exception('bone cannot be null.')
 
-        self.setToBindPose()
+        #C++ does this, but Corona doesn't.
+        #self.setToBindPose()
                           
         
     def setAttachment(self, attachment):
