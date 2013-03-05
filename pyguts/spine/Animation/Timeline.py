@@ -226,7 +226,7 @@ class ScaleTimeline(TranslateTimeline):
         self.FRAME_Y = 2
 
 
-    def apply(skeleton, time, alpha):
+    def apply(self, skeleton, time, alpha):
         if time < self.frames[0]:
             return 
         
@@ -238,8 +238,8 @@ class ScaleTimeline(TranslateTimeline):
         
         # Interpolate between the last frame and the current frame
         frameIndex = binarySearch(self.frames, time, self.FRAME_SPACING)
-        lastFrameX = self.frame[frameIndex - 2]
-        lastFrameY = self.frame[frameIndex - 1]
+        lastFrameX = self.frames[frameIndex - 2]
+        lastFrameY = self.frames[frameIndex - 1]
         frameTime = self.frames[frameIndex]
         percent = 1.0 - (time - frameTime) / (self.frames[frameIndex + self.LAST_FRAME_TIME] - frameTime)
         if percent < 0.0:

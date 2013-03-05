@@ -69,7 +69,10 @@ class Skeleton(spine.Skeleton):
                         rotation = -rotation
                     #print("R: %s, G: %s, B: %s, A: %s" % (slot.r, slot.b, slot.g, slot.a))
                     #texture.fill((int(slot.r), int(slot.b), int(slot.g), int(slot.a)), None, pygame.BLEND_ADD)
-                    texture = pygame.transform.rotate(texture, rotation)
+                    # Since we can't do x/y scale, let's average them together:
+                    avgScale = (xScale + yScale) / 2
+                        
+                    texture = pygame.transform.rotozoom(texture, rotation, avgScale)
                     screen.blit(texture, (x, y))        
 
 
