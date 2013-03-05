@@ -30,7 +30,7 @@ class SkeletonJson(object):
         super(SkeletonJson, self).__init__()
         self.attachmentLoader = attachmentLoader
         self.scale = 1.0
-        self.flipY = False
+        self.flipY = False            
 
 
     def readSkeletonData(self, file):

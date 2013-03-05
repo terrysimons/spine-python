@@ -1,3 +1,5 @@
+import math
+
 import spine
 
 import pygame
@@ -20,6 +22,8 @@ class Line(object):
         self.rotation = 0.0
         self.color = (255, 0, 0, 255)
         self.texture = pygame.Surface((640, 480), pygame.SRCALPHA, 32)
+        #self.texture = pygame.Surface((300, 300), pygame.SRCALPHA, 32)
+        pygame.draw.rect(self.texture, (255, 255, 0, 64), (0, 0, self.texture.get_width(), self.texture.get_height()), 1)
 
 
     def rotate(self):
@@ -67,15 +71,20 @@ class Skeleton(spine.Skeleton):
                     #texture.fill((int(slot.r), int(slot.b), int(slot.g), int(slot.a)), None, pygame.BLEND_ADD)
                     texture = pygame.transform.rotate(texture, rotation)
                     screen.blit(texture, (x, y))        
+
+
+        self.debug = True
+
         if self.debug:
             for bone in self.bones:
 
                 if not bone.line:
                     bone.line = Line(bone.data.length)
-                    bone.line.x = bone.worldX + self.x
-                    bone.line.y = -bone.worldY + self.y
+                    bone.line.x = bone.worldX 
+                    bone.line.y = -bone.worldY
+                    bone.line.rotation = -bone.worldRotation
                     bone.line.color = (255, 0, 0)
-                    pygame.draw.line(bone.line.texture, bone.line.color, (0, 0), (bone.data.length, 0), 1)
+                    pygame.draw.line(bone.line.texture, bone.line.color, (0, 0), (bone.data.length, 0), 2)
 
                 if self.flipX:
                     bone.line.xScale = -1
@@ -88,14 +97,26 @@ class Skeleton(spine.Skeleton):
                 else:
                     bone.line.yScale = 1
 
-                bone.line.rotation = -bone.worldRotation
+                startX = bone.worldX 
+                startY = -bone.worldY 
 
-                #screen.blit(bone.line.rotate(), (bone.line.x, bone.line.y))
+                endX = startX + bone.data.length
+                endY = startY
 
-#                    if bone.parent:
-#                        if bone.parent.parent:
-#                            pygame.draw.line(screen, bone.line.color, (bone.worldX + self.x, -bone.worldY + self.y), (bone.parent.worldX + self.x, -bone.parent.worldY + self.y), 1)
+                if bone.parent:
+                    if bone.parent.parent:
+                        endX = startX * bone.parent.m00 + startY * bone.parent.m01 + bone.parent.worldX
+                        endY = -(startX * bone.parent.m10 + startY * bone.parent.m11 + bone.parent.worldY)
 
+                #pygame.draw.line(screen, bone.line.color, (lineX, lineY), (lineX + bone.data.length, lineY + 0), 2)
+                #pygame.draw.line(screen, bone.line.color, (startX + self.x, startY + self.y), (endX + self.x, endY + self.y), 2)
+
+                #screen.blit(bone.line.texture, (bone.worldX + self.x, -bone.worldY + self.y))
+                #screen.blit(bone.line.rotate(), (bone.worldX + self.x - 320, -bone.worldY + self.y - 240))
+                #screen.blit(bone.line.rotate(), (bone.worldX + self.x, -bone.worldY + self.y))
+                #screen.blit(bone.line.rotate(), (bone.worldX + self.x / 2, -bone.worldY + self.y))
+                #screen.blit(bone.line.rotate(), (bone.worldX + self.x / 2, -bone.worldY + self.y))
+                #screen.blit(bone.line.rotate(), (bone.worldX * bone.m00 + self.x, -bone.worldY * bone.m01 + self.y))
                             
                 if not bone.circle:
                     bone.circle = Circle(0, 0, 3)

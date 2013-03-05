@@ -129,7 +129,6 @@ class RotateTimeline(CurveTimeline):
 
         bone = skeleton.bones[self.boneIndex]
 
-
         if time >= self.frames[self.LAST_FRAME_TIME]: # Time is after last frame
             amount = bone.data.rotation + self.frames[-1] - bone.rotation
             while amount > 180:
@@ -215,7 +214,6 @@ class TranslateTimeline(CurveTimeline):
         
         bone.x += (bone.data.x + lastFrameX + (self.frames[frameIndex + self.FRAME_X] - lastFrameX) * percent - bone.x) * alpha
         bone.y += (bone.data.y + lastFrameY + (self.frames[frameIndex + self.FRAME_Y] - lastFrameY) * percent - bone.y) * alpha
-
         return 
 
 
@@ -252,7 +250,6 @@ class ScaleTimeline(TranslateTimeline):
         
         bone.scaleX += (bone.data.scaleX - 1 + lastFrameX + (self.frames[frameIndex + self.FRAME_X] - lastFrameX) * percent - bone.scaleX) * alpha
         bone.scaleY += (bone.data.scaleY - 1 + lastFrameY + (self.frames[frameIndex + self.FRAME_Y] - lastFrameY) * percent - bone.scaleY) * alpha
-
         return 
 
 

@@ -12,3 +12,19 @@ pycallgraph.png
 *.atlas~
 
 *.json~
+
+pyguts/spine/#Bone#
+
+sword_pygame.py
+
+pyguts/ImageAttachmentLoader.py
+
+data/sword-skeleton.json
+
+data/sword-animation.json
+
+data/Star.png
+
+data/Hilt.png
+
+data/Blade.png
