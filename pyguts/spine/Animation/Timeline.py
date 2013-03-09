@@ -135,7 +135,7 @@ class RotateTimeline(CurveTimeline):
                 amount -= 360
             while amount < -180:
                 amount += 360
-            bone.rotation += amount * alpha
+            bone.rotation = bone.rotation + amount * alpha
             return
 
         # Interpolate between the last frame and the current frame
@@ -290,10 +290,11 @@ class ColorTimeline(CurveTimeline):
         slot = skeleton.slots[self.slotIndex]
         
         if time >= self.frames[self.LAST_FRAME_TIME]:      # -5
-            slot.r = self.frames[self.LAST_FRAME_TIME + 1] # -4
-            slot.g = self.frames[self.LAST_FRAME_TIME + 2] # -3
-            slot.b = self.frames[self.LAST_FRAME_TIME + 3] # -2
-            slot.a = self.frames[self.LAST_FRAME_TIME + 4] # -1
+            i = len(self.frames) - 1
+            slot.r = self.frames[i - 3] # -4
+            slot.g = self.frames[i - 2] # -3
+            slot.b = self.frames[i - 1] # -2
+            slot.a = self.frames[i] # -1
             skeleton.slots[self.slotIndex] = slot
             return 
         
@@ -307,8 +308,8 @@ class ColorTimeline(CurveTimeline):
         percent = 1 - (time - frameTime) / (self.frames[frameIndex + self.LAST_FRAME_TIME] - frameTime)
         if percent < 0.0:
             percent = 0.0
-        if percent > 255:
-            percent = 255
+        if percent > 1:
+            percent = 1
         percent = self.getCurvePercent(frameIndex / self.FRAME_SPACING - 1, percent)
 
         r = lastFrameR + (self.frames[frameIndex + self.FRAME_R] - lastFrameR) * percent
@@ -325,6 +326,7 @@ class ColorTimeline(CurveTimeline):
             slot.g = g
             slot.b = b
             slot.a = a
+        skeleton.slots[self.slotIndex] = slot
         return 
 
 

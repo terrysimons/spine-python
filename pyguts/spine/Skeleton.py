@@ -41,7 +41,7 @@ class Skeleton(object):
                 if self.data.bones[ii] == slotData.boneData:
                     bone = self.bones[ii]
                     break
-            slot = Slot(data=slotData, skeleton=self, bone=bone)
+            slot = Slot(slotData=slotData, skeleton=self, bone=bone)
             self.slots[i] = slot
             self.drawOrder.append(slot)
     
