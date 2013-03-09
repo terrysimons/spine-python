@@ -45,12 +45,12 @@ if __name__ == '__main__':
     skeleton.updateWorldTransform()
 
     clock = pygame.time.Clock()    
+    clock.tick(60)
     animationTime = 0.0
 
     done = False
 
     while not done:
-        clock.tick(60)
         animationTime += clock.get_time() / 1000.0                
         animation.apply(skeleton=skeleton,
                         time=animationTime,
