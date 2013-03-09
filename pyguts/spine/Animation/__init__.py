@@ -7,6 +7,15 @@ class Animation(object):
         self.timelines = timelines
         self.duration = duration
 
+
+    def mix(self, skeleton, time, loop, alpha):
+        if not skeleton:
+            raise Exception('Skeleton cannot be None.')
+
+        for timeline in self.timelines:
+            timline.apply(skeleton, time, alpha)
+
+
     def apply(self, skeleton, time, loop):
         if not skeleton:
             raise Exception('Skeleton cannot be None.')
