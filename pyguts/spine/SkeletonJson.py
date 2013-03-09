@@ -60,9 +60,7 @@ class SkeletonJson(object):
             boneData.rotation = float(boneMap.get('rotation', 0.0))
             boneData.scaleX = float(boneMap.get('scaleX', 1.0))
             boneData.scaleY = float(boneMap.get('scaleY', 1.0))
-
             skeletonData.bones.append(boneData)
-
 
         for slotMap in root['slots']:
             slotName = slotMap['name']
@@ -118,6 +116,7 @@ class SkeletonJson(object):
 
                         if type == AttachmentLoader.AttachmentType.region or type == AttachmentLoader.AttachmentType.regionSequence:
                             regionAttachment = attachment
+                            regionAttachment.name = attachmentName
                             regionAttachment.x = float(attachmentMap.get('x', 0.0)) * self.scale
                             regionAttachment.y = float(attachmentMap.get('y', 0.0)) * self.scale
                             regionAttachment.scaleX = float(attachmentMap.get('scaleX', 1.0))
@@ -125,6 +124,7 @@ class SkeletonJson(object):
                             regionAttachment.rotation = float(attachmentMap.get('rotation', 0.0))
                             regionAttachment.width = float(attachmentMap.get('width', 32)) * self.scale
                             regionAttachment.height = float(attachmentMap.get('height', 32)) * self.scale
+
 
                         skin.addAttachment(slotIndex, attachmentName, attachment)
 
