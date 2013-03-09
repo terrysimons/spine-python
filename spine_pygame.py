@@ -19,23 +19,17 @@ if __name__ == '__main__':
     atlasFile = os.path.realpath('./data/spineboy.atlas')
     atlas = spine.Atlas(file=atlasFile)
 
-    #atlasFile = os.path.realpath('./data/test.atlas')
-    #atlas = spine.Atlas(file=atlasFile)
-
     skeletonJson = spine.SkeletonJson(spine.AtlasAttachmentLoader(atlas))
 
     skeletonFile = os.path.realpath('./data/spineboy-skeleton.json')
     skeletonData = skeletonJson.readSkeletonData(skeletonFile)
-
-    #skeletonFile = os.path.realpath('./data/test.json')
-    #skeletonData = skeletonJson.readSkeletonData(skeletonFile)
 
     animationFile = os.path.realpath('./data/spineboy-walk.json')
     animation = skeletonJson.readAnimation(file=animationFile, 
                                            skeletonData=skeletonData)       
 
     skeleton = spine.Skeleton(skeletonData=skeletonData)
-    skeleton.debug = True
+    skeleton.debug = False
 
     skeleton.x = 320
     skeleton.y = 400
@@ -50,8 +44,13 @@ if __name__ == '__main__':
     done = False
 
     while not done:
+<<<<<<< HEAD
         clock.tick(0)
         animationTime += clock.get_time() / 1000.0                
+=======
+        clock.tick()
+        animationTime += clock.get_time() / 1000.0
+>>>>>>> Code cleanups.
         animation.apply(skeleton=skeleton,
                         time=animationTime,
                         loop=True)
