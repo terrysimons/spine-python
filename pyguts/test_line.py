@@ -56,8 +56,8 @@ if __name__ == '__main__':
         
         pygame.draw.circle(screen, (255, 0, 0, 255), (320, 240), 3, 0)
         
-        screen.blit(lineTexture, (bone['x'], bone['y']))
-        
+        #screen.blit(lineTexture, (bone['x'], bone['y']))
+
         import time; time.sleep(0.1)
         print('%s, %s, %s' % (bone['x'], bone['y'], bone['rotation']))
         bone['rotation'] += 1

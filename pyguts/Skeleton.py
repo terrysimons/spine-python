@@ -48,7 +48,7 @@ class Skeleton(spine.Skeleton):
 
         for slot in self.drawOrder:
             if slot.attachment:
-                texture = slot.attachment.texture
+                texture = slot.attachment.texture.copy()
                 if texture:
                     x = slot.bone.worldX + slot.attachment.x * slot.bone.m00 + slot.attachment.y * slot.bone.m01
                     y = -(slot.bone.worldY + slot.attachment.x * slot.bone.m10 + slot.attachment.y * slot.bone.m11)
@@ -71,9 +71,9 @@ class Skeleton(spine.Skeleton):
                         rotation = -rotation
                     avgScale = (xScale + yScale) / 2
                     
-                    #texture.fill((slot.r, slot.g, slot.b, slot.a), None, pygame.BLEND_MAX)
+                    texture.fill((slot.r, slot.g, slot.b, slot.a), None, pygame.BLEND_RGBA_MULT)
                     
-                    texture = pygame.transform.rotozoom(texture, rotation, 1)
+                    texture = pygame.transform.rotozoom(texture, -rotation, avgScale)
                     screen.blit(texture, (x, y))        
 
 

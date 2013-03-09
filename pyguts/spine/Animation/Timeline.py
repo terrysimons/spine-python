@@ -132,15 +132,15 @@ class RotateTimeline(CurveTimeline):
         if time >= self.frames[self.LAST_FRAME_TIME]: # Time is after last frame
             amount = bone.data.rotation + self.frames[-1] - bone.rotation
             while amount > 180:
-                amount -= 360
+                amount = amount - 360
             while amount < -180:
-                amount += 360
+                amount = amount + 360
             bone.rotation = bone.rotation + amount * alpha
             return
 
         # Interpolate between the last frame and the current frame
         frameIndex = binarySearch(self.frames, time, self.FRAME_SPACING)
-        lastFrameValue = self.frames[frameIndex -1]
+        lastFrameValue = self.frames[frameIndex - 1]
         frameTime = self.frames[frameIndex]
         percent = 1.0 - (time - frameTime) / (self.frames[frameIndex + self.LAST_FRAME_TIME] - frameTime)
         if percent < 0.0:
@@ -151,14 +151,14 @@ class RotateTimeline(CurveTimeline):
 
         amount = self.frames[frameIndex + self.FRAME_VALUE] - lastFrameValue
         while amount > 180:
-            amount -= 360
+            amount = amount - 360
         while amount < -180:
-            amount += 360
+            amount = amount + 360
         amount = bone.data.rotation + (lastFrameValue + amount * percent) - bone.rotation
         while amount > 180:
-            amount -= 360
+            amount = amount - 360
         while amount < -180:
-            amount += 360
+            amount = amount + 360
         bone.rotation = bone.rotation + amount * alpha
         return 
 
@@ -308,8 +308,8 @@ class ColorTimeline(CurveTimeline):
         percent = 1 - (time - frameTime) / (self.frames[frameIndex + self.LAST_FRAME_TIME] - frameTime)
         if percent < 0.0:
             percent = 0.0
-        if percent > 1:
-            percent = 1
+        if percent > 255:
+            percent = 255
         percent = self.getCurvePercent(frameIndex / self.FRAME_SPACING - 1, percent)
 
         r = lastFrameR + (self.frames[frameIndex + self.FRAME_R] - lastFrameR) * percent
