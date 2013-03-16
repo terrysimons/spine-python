@@ -50,7 +50,7 @@ if __name__ == '__main__':
     done = False
 
     while not done:
-        clock.tick(60)
+        clock.tick(0)
         animationTime += clock.get_time() / 1000.0                
         animation.apply(skeleton=skeleton,
                         time=animationTime,
