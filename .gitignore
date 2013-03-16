@@ -42,3 +42,5 @@ data/sword/Hilt.png
 data/sword/Star.png
 
 spine_and_sword.py
+
+build/pip-delete-this-directory.txt
