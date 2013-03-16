@@ -18,11 +18,16 @@ class Key(object):
 
 class Skin(object):
     def __init__(self, name):
+        super(Skin, self).__init__()
+        if not name:
+            raise Exception('Name cannot be None.')
         self.name = name
         self.attachments = {}
 
 
     def addAttachment(self, slotIndex, name, attachment):
+        if not name:
+            raise Exception('Name cannot be None.')        
         key = Key(slotIndex=slotIndex, name=name)
         self.attachments[key] = attachment
 
