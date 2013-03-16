@@ -24,7 +24,6 @@ class Line(object):
         self.rotation = 0.0
         self.color = (255, 0, 0, 255)
         self.texture = pygame.Surface((640, 480), pygame.SRCALPHA, 32)
-        #self.texture = pygame.Surface((300, 300), pygame.SRCALPHA, 32)
         pygame.draw.rect(self.texture, (255, 255, 0, 64), (0, 0, self.texture.get_width(), self.texture.get_height()), 1)
 
 
@@ -42,8 +41,8 @@ class Skeleton(spine.Skeleton):
         self.images = []
 
     def draw(self, screen, states):
-        for bone in self.bones:
-            bone.updateWorldTransform(self.flipX, self.flipY)
+        #for i, bone in enumerate(self.bones):
+        #    self.bones[i].updateWorldTransform(self.flipX, self.flipY)
 
         x = 0
         y = 0
@@ -78,9 +77,6 @@ class Skeleton(spine.Skeleton):
                     texture = pygame.transform.rotozoom(texture, -rotation, avgScale)
                     screen.blit(texture, (x, y))        
 
-
-        self.debug = True
-
         if self.debug:
             for bone in self.bones:
 
@@ -105,9 +101,6 @@ class Skeleton(spine.Skeleton):
                 bone.line.x1 = bone.line.x + math.cos(math.radians(bone.line.rotation)) * bone.line.length
                 bone.line.y1 = bone.line.y + math.sin(math.radians(bone.line.rotation)) * bone.line.length
 
-                #bone.line.x1 += self.x
-                #bone.line.y1 += self.y
-                                                     
                 pygame.draw.line(screen, bone.line.color, (bone.line.x, bone.line.y), (bone.line.x1, bone.line.y1))
 
                 if not bone.circle:
@@ -130,22 +123,3 @@ class Skeleton(spine.Skeleton):
                                    (bone.circle.x, bone.circle.y),
                                    bone.circle.r,
                                    0)
-
-                #print('Bone Name: %s' % bone.data.name)
-                #import pprint; pprint.pprint(bone.__dict__)
-                #import pprint; pprint.pprint(bone.data.__dict__)
-                    
-                fontDebug = False
-
-                if fontDebug:
-                    pygame.font.init()
-                    myfont = pygame.font.SysFont(None, 12)
-                    nameTexture = myfont.render(bone.data.name, 0, (255, 255, 255))
-                    posTexture = myfont.render('x: %s, y: %s' % (bone.circle.x, bone.circle.y), 0, (255, 255, 255))
-                    screen.blit(nameTexture, (bone.circle.x - 200, bone.circle.y - 10))
-                    screen.blit(posTexture, (bone.circle.x - 200, bone.circle.y + 10))
-                    pygame.display.flip()
-                    
-        #print(self.bones[0].x, self.bones[0].y, self.bones[0].rotation)                    
-        #while (pygame.event.wait().type != pygame.KEYDOWN): pass
-        #self.bones[0].rotation += 15

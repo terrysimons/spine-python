@@ -29,13 +29,13 @@ if __name__ == '__main__':
                                            skeletonData=skeletonData)       
 
     skeleton = spine.Skeleton(skeletonData=skeletonData)
-    skeleton.debug = False
+    skeleton.debug = True
 
+    skeleton.setToBindPose()
     skeleton.x = 320
     skeleton.y = 400
     skeleton.flipX = False
     skeleton.flipY = False
-    skeleton.setToBindPose()
     skeleton.updateWorldTransform()
 
     clock = pygame.time.Clock()    
@@ -49,6 +49,7 @@ if __name__ == '__main__':
         animation.apply(skeleton=skeleton,
                         time=animationTime,
                         loop=True)
+        #skeleton.updateWorldTransform()
         screen.fill((0, 0, 0))
         skeleton.draw(screen, 0)
         pygame.display.set_caption('%s  %.2f' % (caption, clock.get_fps()), 'Spine Runtime')

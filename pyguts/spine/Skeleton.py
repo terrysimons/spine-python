@@ -47,7 +47,7 @@ class Skeleton(object):
     
     
     def updateWorldTransform(self):
-        for i in range(len(self.bones)):
+        for i, bone in enumerate(self.bones):
             self.bones[i].updateWorldTransform(self.flipX, self.flipY)
 
     
@@ -57,12 +57,12 @@ class Skeleton(object):
 
     
     def setBonesToBindPose(self):
-        for i in range(len(self.bones)):
+        for i, bone in enumerate(self.bones):
             self.bones[i].setToBindPose()
 
     
     def setSlotsToBindPose(self):
-        for i in range(len(self.slots)):
+        for i, bone in enumerate(self.slots):
             self.slots[i].setToBindPoseWithIndex(i)
 
 
@@ -71,34 +71,35 @@ class Skeleton(object):
             return self.bones[0]
         return None
 
+
     def setRootBone(self, bone):
         if len(self.bones):
             self.bones[0] = bone
     
     
     def findBone(self, boneName):
-        for i in range(len(self.bones)):
+        for i, bone in enumerate(self.bones):
             if self.data.bones[i].name == boneName:
                 return self.bones[i]
         return None
 
     
     def findBoneIndex(self, boneName):
-        for i in range(len(self.bones)):
+        for i, bone in enumerate(self.bones):
             if self.data.bones[i].name == boneName:
                 return i
         return -1
 
 
     def findSlot(self, slotName):
-        for i in range(len(self.slots)):
+        for i, slot in enumerate(self.slots):
             if self.data.slots[i].name == slotName:
                 return self.slots[i]
         return None
 
 
     def findSlotIndex(self, slotName):
-        for i in range(len(self.slots)):
+        for i, slot in enumerate(self.slots):
             if self.data.slots[i].name == slotName:
                 return i
         return -1
