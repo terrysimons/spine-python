@@ -18,6 +18,8 @@ class Line(object):
         super(Line, self).__init__()
         self.x = 0.0
         self.y = 0.0
+        self.x1 = 0.0
+        self.x2 = 0.0
         self.length = length
         self.rotation = 0.0
         self.color = (255, 0, 0, 255)
@@ -100,19 +102,14 @@ class Skeleton(spine.Skeleton):
                 else:
                     bone.line.yScale = 1
 
-                lineX = bone.line.x + bone.data.length * bone.m00 + bone.y * bone.m01
-                lineY = -(bone.line.y + bone.data.length * bone.m01 + bone.y * bone.m11)
-            
-                #pygame.draw.line(screen, bone.line.color, (bone.line.x, bone.line.y), (lineX, lineY), 2)
-                #pygame.draw.line(screen, bone.line.color, (startX + self.x, startY + self.y), (endX + self.x, endY + self.y), 2)
+                bone.line.x1 = bone.line.x + math.cos(math.radians(bone.line.rotation)) * bone.line.length
+                bone.line.y1 = bone.line.y + math.sin(math.radians(bone.line.rotation)) * bone.line.length
 
-                #screen.blit(bone.line.texture, (bone.worldX + self.x, -bone.worldY + self.y))
-                #screen.blit(bone.line.rotate(), (bone.worldX + self.x - 320, -bone.worldY + self.y - 240))
-                #screen.blit(bone.line.rotate(), (bone.worldX + self.x, -bone.worldY + self.y))
-                #screen.blit(bone.line.rotate(), (bone.worldX + self.x / 2, -bone.worldY + self.y))
-                #screen.blit(bone.line.rotate(), (bone.worldX + self.x / 2, -bone.worldY + self.y))
-                #screen.blit(bone.line.rotate(), (bone.worldX * bone.m00 + self.x, -bone.worldY * bone.m01 + self.y))
-                            
+                #bone.line.x1 += self.x
+                #bone.line.y1 += self.y
+                                                     
+                pygame.draw.line(screen, bone.line.color, (bone.line.x, bone.line.y), (bone.line.x1, bone.line.y1))
+
                 if not bone.circle:
                     bone.circle = Circle(0, 0, 3)
                 bone.circle.x = int(bone.worldX) + self.x
