@@ -17,15 +17,8 @@ class Slot(object):
         self.attachment = None
         self.attachmentTime = 0.0
 
-        if not self.data:
-            raise Exception('data cannot be null.')
-        if not self.skeleton:
-            raise Exception('skeleton cannot be null.')
-        if not self.bone:
-            raise Exception('bone cannot be null.')
-
         #C++ does this, but Corona doesn't.
-        #self.setToBindPose()
+        self.setToBindPose()
 
 
     def setColor(self, r, g, b, a):
