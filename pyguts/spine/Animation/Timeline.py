@@ -183,7 +183,7 @@ class TranslateTimeline(CurveTimeline):
 
 
     def setKeyframe(self, keyframeIndex, time, x, y):
-        keyframeIndex *= self.FRAME_SPACING
+        keyframeIndex = keyframeIndex * self.FRAME_SPACING
         self.frames[keyframeIndex] = time
         self.frames[keyframeIndex + 1] = x
         self.frames[keyframeIndex + 2] = y
@@ -196,8 +196,8 @@ class TranslateTimeline(CurveTimeline):
         bone = skeleton.bones[self.boneIndex]
         
         if time >= self.frames[self.LAST_FRAME_TIME]: # Time is after the last frame.
-            bone.x += (bone.data.x + self.frames[self.LAST_FRAME_TIME + 1] - bone.x) * alpha
-            bone.y += (bone.data.y + self.frames[self.LAST_FRAME_TIME + 2] - bone.y) * alpha
+            bone.x = bone.x + (bone.data.x + self.frames[self.LAST_FRAME_TIME + 1] - bone.x) * alpha
+            bone.y = bone.y + (bone.data.y + self.frames[self.LAST_FRAME_TIME + 2] - bone.y) * alpha
             return 
 
         # Interpolate between the last frame and the current frame
@@ -212,8 +212,8 @@ class TranslateTimeline(CurveTimeline):
             percent = 1.0
         percent = self.getCurvePercent(frameIndex / self.FRAME_SPACING - 1, percent)
         
-        bone.x += (bone.data.x + lastFrameX + (self.frames[frameIndex + self.FRAME_X] - lastFrameX) * percent - bone.x) * alpha
-        bone.y += (bone.data.y + lastFrameY + (self.frames[frameIndex + self.FRAME_Y] - lastFrameY) * percent - bone.y) * alpha
+        bone.x = bone.x + (bone.data.x + lastFrameX + (self.frames[frameIndex + self.FRAME_X] - lastFrameX) * percent - bone.x) * alpha
+        bone.y = bone.y + (bone.data.y + lastFrameY + (self.frames[frameIndex + self.FRAME_Y] - lastFrameY) * percent - bone.y) * alpha
         return 
 
 
@@ -295,7 +295,6 @@ class ColorTimeline(CurveTimeline):
             slot.g = self.frames[i - 2] # -3
             slot.b = self.frames[i - 1] # -2
             slot.a = self.frames[i] # -1
-            skeleton.slots[self.slotIndex] = slot
             return 
         
         # Interpolate between the last frame and the current frame.
@@ -326,7 +325,6 @@ class ColorTimeline(CurveTimeline):
             slot.g = g
             slot.b = b
             slot.a = a
-        skeleton.slots[self.slotIndex] = slot
         return 
 
 
@@ -354,7 +352,7 @@ class AttachmentTimeline(Timeline):
 
 
     def apply(self, skeleton, time, alpha):
-        if time < self.frames[0]: # Time is before first frame
+        if time < self.frames[0]: # Time is before first frame            
             return 
 
         frameIndex = 0
