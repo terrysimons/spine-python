@@ -44,13 +44,8 @@ if __name__ == '__main__':
     done = False
 
     while not done:
-<<<<<<< HEAD
         clock.tick(0)
         animationTime += clock.get_time() / 1000.0                
-=======
-        clock.tick()
-        animationTime += clock.get_time() / 1000.0
->>>>>>> Code cleanups.
         animation.apply(skeleton=skeleton,
                         time=animationTime,
                         loop=True)
