@@ -3,13 +3,14 @@
 from setuptools import setup
 
 setup(name='pyguts',
-      version='1.0b1',
+      version='1.0b2',
       description='A pygame front-end for spine-python.',
       author='Terry Simons',
       author_email='terry.simons@gmail.com',
       url='https://github.com/terrysimons/spine-python/pyguts',
       package_dir={'pyguts': 'src'},
       packages=['pyguts'],
+      package_data={'examples': ['examples/*']},
       classifiers=['License :: OSI Approved :: BSD License'],
       install_requires=['spine_python']
      )

@@ -41,9 +41,6 @@ class Skeleton(spine.Skeleton):
         self.images = []
 
     def draw(self, screen, states):
-        #for i, bone in enumerate(self.bones):
-        #    self.bones[i].updateWorldTransform(self.flipX, self.flipY)
-
         x = 0
         y = 0
 
@@ -51,7 +48,7 @@ class Skeleton(spine.Skeleton):
             if slot.attachment:
                 texture = slot.attachment.texture.copy()
                 if texture:
-                    x = slot.bone.worldX + slot.attachment.x * slot.bone.m00 + slot.attachment.y * slot.bone.m01
+                    x = slot.bone.worldX + slot.attachment.x  * slot.bone.m00 + slot.attachment.y * slot.bone.m01
                     y = -(slot.bone.worldY + slot.attachment.x * slot.bone.m10 + slot.attachment.y * slot.bone.m11)
                     rotation = -(slot.bone.worldRotation + slot.attachment.rotation)
                     xScale = slot.bone.worldScaleX + slot.attachment.scaleX - 1
@@ -59,10 +56,6 @@ class Skeleton(spine.Skeleton):
 
                     x += self.x
                     y += self.y
-
-                    # Center image.
-                    x -= slot.attachment.offset.center[0]
-                    y -= slot.attachment.offset.center[1]
 
                     if self.flipX:
                         xScale = -xScale
@@ -74,8 +67,13 @@ class Skeleton(spine.Skeleton):
                     
                     texture.fill((slot.r, slot.g, slot.b, slot.a), None, pygame.BLEND_RGBA_MULT)
                     
+                    center = texture.get_rect().center
                     texture = pygame.transform.rotozoom(texture, -rotation, avgScale)
-                    screen.blit(texture, (x, y))        
+
+                    # Center image
+                    x = x - texture.get_width() / 2
+                    y = y - texture.get_height() / 2
+                    screen.blit(texture, (x, y))
 
         if self.debug:
             for bone in self.bones:

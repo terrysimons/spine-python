@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(name='spine-python',
-      version='1.0b1',
+      version='1.0b2',
       description='A Pure Python Spine runtime.',
       author='Terry Simons',
       author_email='terry.simons@gmail.com',

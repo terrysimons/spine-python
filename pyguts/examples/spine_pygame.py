@@ -45,11 +45,11 @@ if __name__ == '__main__':
 
     while not done:
         clock.tick(0)
-        animationTime += clock.get_time() / 1000.0                
+        animationTime += clock.get_time() / 1000.0
         animation.apply(skeleton=skeleton,
                         time=animationTime,
                         loop=True)
-        #skeleton.updateWorldTransform()
+        skeleton.updateWorldTransform()
         screen.fill((0, 0, 0))
         skeleton.draw(screen, 0)
         pygame.display.set_caption('%s  %.2f' % (caption, clock.get_fps()), 'Spine Runtime')

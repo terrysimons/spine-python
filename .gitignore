@@ -44,3 +44,17 @@ data/sword/Star.png
 spine_and_sword.py
 
 build/pip-delete-this-directory.txt
+
+pyguts/examples/data/sword-skeleton.json
+
+pyguts/examples/data/sword-stars.json
+
+pyguts/examples/data/sword.atlas
+
+pyguts/examples/data/sword.png
+
+pyguts/examples/data/sword/Blade.png
+
+pyguts/examples/data/sword/Hilt.png
+
+pyguts/examples/data/sword/Star.png
