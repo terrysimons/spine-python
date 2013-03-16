@@ -134,9 +134,9 @@ class Skeleton(spine.Skeleton):
                                    bone.circle.r,
                                    0)
 
-                print('Bone Name: %s' % bone.data.name)
-                import pprint; pprint.pprint(bone.__dict__)
-                import pprint; pprint.pprint(bone.data.__dict__)
+                #print('Bone Name: %s' % bone.data.name)
+                #import pprint; pprint.pprint(bone.__dict__)
+                #import pprint; pprint.pprint(bone.data.__dict__)
                     
                 fontDebug = False
 
