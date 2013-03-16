@@ -10,4 +10,5 @@ setup(name='spine-python',
       url='https://github.com/terrysimons/spine-python/spine-python',
       package_dir={'spine': 'src'},
       packages=['spine', 'spine.Atlas', 'spine.Animation'],
+      classifiers=['License :: OSI Approved :: BSD License']
      )

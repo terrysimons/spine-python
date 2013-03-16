@@ -10,5 +10,6 @@ setup(name='pyguts',
       url='https://github.com/terrysimons/spine-python/pyguts',
       package_dir={'pyguts': 'src'},
       packages=['pyguts'],
+      classifiers=['License :: OSI Approved :: BSD License'],
       install_requires=['spine_python']
      )
