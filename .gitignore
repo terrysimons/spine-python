@@ -58,3 +58,5 @@ pyguts/examples/data/sword/Blade.png
 pyguts/examples/data/sword/Hilt.png
 
 pyguts/examples/data/sword/Star.png
+
+*.md~
