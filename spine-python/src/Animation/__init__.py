@@ -12,8 +12,11 @@ class Animation(object):
         if not skeleton:
             raise Exception('Skeleton cannot be None.')
 
+        if loop and duration:
+            time = time % duration
+
         for timeline in self.timelines:
-            timline.apply(skeleton, time, alpha)
+            timeline.apply(skeleton, time, alpha)
 
 
     def apply(self, skeleton, time, loop):

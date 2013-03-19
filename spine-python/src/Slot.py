@@ -16,8 +16,6 @@ class Slot(object):
         self.a = 255
         self.attachment = None
         self.attachmentTime = 0.0
-
-        #C++ does this, but Corona doesn't.
         self.setToBindPose()
 
 

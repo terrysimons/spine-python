@@ -138,3 +138,9 @@ class Skeleton(object):
                 self.slots[i].setAttachment(self.getAttachmentByIndex(i, attachmentName))
                 return
         raise Exception('Slot not found: %s' % slotName)
+
+
+    def update(self, delta):
+        self.time += delta
+
+    
