@@ -103,6 +103,7 @@ class Atlas(object):
             value = line.strip().rstrip()
             if len(value) == 0:
                 _page = {}
+                page = None
             if not page:
                 if not ':' in value:
                     value = value.strip().rstrip()
@@ -121,7 +122,7 @@ class Atlas(object):
                             value = True
                         _page[key] = value
                     if key == 'repeat':
-                        page = self.newAtlasPage(_page['name'])                                                 
+                        page = self.newAtlasPage(_page['name'])
                         page.format = _page['format']
                         page.minFilter = _page['filter'][0]
                         page.magFilter = _page['filter'][1]
@@ -134,12 +135,8 @@ class Atlas(object):
                         elif _page['repeat'] == 'xy':
                             page.uWrap = TextureWrap.repeat
                             page.vWrap = TextureWrap.repeat
-                        #print('Page: ')
-                        #import pprint; pprint.pprint(_page)
-                        #print('Page Dict: ')
-                        #import pprint; pprint.pprint(page.__dict__)
                         self.pages.append(page)
-            else:                
+            else:
                 if not ':' in value:
                     value = value.strip().rstrip()
                     _region['name'] = value
@@ -178,10 +175,6 @@ class Atlas(object):
                         region.offsetX = _region['offset'][0]
                         region.offsetY = _region['offset'][1]
                         region.index = int(_region['index'])
-                        #print('Region: ')
-                        #import pprint; pprint.pprint(_region)
-#                        print('Region Dict: ')
-#                        import pprint; pprint.pprint(region.__dict__)
                         self.regions.append(region)
                         _region = {}
                         continue
