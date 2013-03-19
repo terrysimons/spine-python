@@ -9,7 +9,7 @@ import pyguts as spine
 if __name__ == '__main__':
     pygame.init()
 
-    width, height = (640, 480)
+    width, height = (1024, 768)
 
     screen = pygame.display.set_mode((width, height))
     screen.fill((0,0,0))
@@ -32,8 +32,8 @@ if __name__ == '__main__':
     skeleton.debug = True
 
     skeleton.setToBindPose()
-    skeleton.x = 320
-    skeleton.y = 400
+    skeleton.x = 480
+    skeleton.y = 320
     skeleton.flipX = False
     skeleton.flipY = False
     skeleton.updateWorldTransform()
