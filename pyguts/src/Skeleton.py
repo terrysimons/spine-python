@@ -39,6 +39,7 @@ class Skeleton(spine.Skeleton):
         self.texture = None
         self.debug = True
         self.images = []
+        self.clock = None
 
     def draw(self, screen, states):
         x = 0
@@ -88,6 +89,16 @@ class Skeleton(spine.Skeleton):
                     screen.blit(texture, (x, y))
 
         if self.debug:
+            if not self.clock:
+                self.clock = pygame.time.Clock()
+            self.clock.tick()
+            # Draw the FPS in the bottom right corner.
+            pygame.font.init()
+            myfont = pygame.font.SysFont(None, 24, bold=True)
+            mytext = myfont.render('FPS: %.2f' % self.clock.get_fps(), True, (255, 255, 255))
+
+            screen.blit(mytext, (screen.get_width() - mytext.get_width(), screen.get_height() - mytext.get_height()))
+
             for bone in self.bones:
 
                 if not bone.line:
