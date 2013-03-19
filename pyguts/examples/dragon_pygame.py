@@ -44,6 +44,13 @@ if __name__ == '__main__':
     done = False
 
     while not done:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                done = True
+            elif event.type == pygame.KEYDOWN:
+                if pygame.key.get_pressed()[pygame.K_ESCAPE]:
+                    done = True
         clock.tick(0)
         animationTime += clock.get_time() / 1000.0
         animation.apply(skeleton=skeleton,

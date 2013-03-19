@@ -86,8 +86,6 @@ class Atlas(object):
 
         text = None
 
-        print("Loading with file %s" % file)
-
         with open(os.path.realpath(file), 'r') as fh:
             text = fh.readlines()
         self.load(text)
