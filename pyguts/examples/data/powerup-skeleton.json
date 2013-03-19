@@ -1,0 +1,79 @@
+{
+"bones": [
+	{ "name": "root" },
+	{ "name": "powerup", "parent": "root", "x": 1.48, "y": 134.02 },
+	{ "name": "stars", "parent": "root", "x": 1.22, "y": 191.25 },
+	{ "name": "tokenRoot", "parent": "powerup", "x": -0.47, "y": 56.13 },
+	{ "name": "right wing", "parent": "tokenRoot", "x": 86.82, "y": 7.12 },
+	{ "name": "left wing", "parent": "tokenRoot", "x": -91.06, "y": 7.8 },
+	{ "name": "token", "parent": "tokenRoot", "x": -1.18, "y": -1.81, "scaleX": 0.771, "scaleY": 0.771 },
+	{ "name": "star7", "parent": "stars", "x": -5.85, "y": -35.84 },
+	{ "name": "star5", "parent": "stars", "x": 11.5, "y": -12.28 },
+	{ "name": "star4", "parent": "stars", "x": 10.08, "y": 14.52 },
+	{ "name": "star3", "parent": "stars", "x": -0.84, "y": -3.78 },
+	{ "name": "star2", "parent": "stars", "x": -1.36, "y": -4.16 },
+	{ "name": "star", "parent": "stars", "x": 2.84, "y": 4.76 },
+	{ "name": "star1", "parent": "stars", "x": -2.19, "y": -2.04 },
+	{ "name": "star6", "parent": "stars", "x": -20.73, "y": -23.44 },
+	{ "name": "star8", "parent": "stars", "x": 8.41, "y": -10.05 },
+	{ "name": "star9", "parent": "stars", "x": -1.62, "y": -7.34 }
+],
+"slots": [
+	{ "name": "right wing", "bone": "right wing", "attachment": "wing" },
+	{ "name": "left wing", "bone": "left wing", "attachment": "wing" },
+	{ "name": "star", "bone": "star", "color": "ffffff00", "attachment": "star" },
+	{ "name": "star1", "bone": "star1", "color": "ffa5a500", "attachment": "star" },
+	{ "name": "star2", "bone": "star2", "color": "ffffff00", "attachment": "star" },
+	{ "name": "star3", "bone": "star3", "color": "ffffff00", "attachment": "star" },
+	{ "name": "star4", "bone": "star4", "color": "ffffff00", "attachment": "star" },
+	{ "name": "star5", "bone": "star5", "color": "ffffff00", "attachment": "star" },
+	{ "name": "star6", "bone": "star6", "color": "ffffff00", "attachment": "star" },
+	{ "name": "star7", "bone": "star7", "color": "ffffff00", "attachment": "star" },
+	{ "name": "star8", "bone": "star8", "color": "ffffff00", "attachment": "star" },
+	{ "name": "star9", "bone": "star9", "color": "ffffff00", "attachment": "star" },
+	{ "name": "token", "bone": "token", "attachment": "token" }
+],
+"skins": {
+	"default": {
+		"right wing": {
+			"wing": { "x": 49.55, "y": 42.32, "width": 137, "height": 150 }
+		},
+		"left wing": {
+			"wing": { "x": -48.74, "y": 42.16, "scaleX": -1, "width": 137, "height": 150 }
+		},
+		"star": {
+			"star": { "width": 76, "height": 72 }
+		},
+		"star1": {
+			"star": { "width": 76, "height": 72 }
+		},
+		"star2": {
+			"star": { "width": 76, "height": 72 }
+		},
+		"star3": {
+			"star": { "width": 76, "height": 72 }
+		},
+		"star4": {
+			"star": { "width": 76, "height": 72 }
+		},
+		"star5": {
+			"star": { "width": 76, "height": 72 }
+		},
+		"star6": {
+			"star": { "width": 76, "height": 72 }
+		},
+		"star7": {
+			"star": { "width": 76, "height": 72 }
+		},
+		"star8": {
+			"star": { "width": 76, "height": 72 }
+		},
+		"star9": {
+			"star": { "width": 76, "height": 72 }
+		},
+		"token": {
+			"token": { "x": 1.18, "y": 1.81, "width": 123, "height": 122 }
+		}
+	}
+}
+}

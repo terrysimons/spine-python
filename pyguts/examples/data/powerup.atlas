@@ -1,0 +1,26 @@
+
+data/powerup.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+wing
+  rotate: false
+  xy: 1, 75
+  size: 137, 150
+  orig: 137, 150
+  offset: 0, 0
+  index: -1
+token
+  rotate: false
+  xy: 140, 103
+  size: 123, 122
+  orig: 123, 122
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 1, 1
+  size: 76, 72
+  orig: 76, 72
+  offset: 0, 0
+  index: -1
