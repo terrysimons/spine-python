@@ -1,0 +1,40 @@
+{
+"bones": [
+	{ "name": "root", "y": -526.31 },
+	{ "name": "logo", "parent": "root", "y": 1332.02 },
+	{ "name": "play", "parent": "root", "x": 3.02, "y": -83.61 },
+	{ "name": "settings", "parent": "root", "x": 3.02, "y": -144.37 },
+	{ "name": "quit", "parent": "root", "x": -2.85, "y": -201.21 },
+	{ "name": "leaves", "parent": "root", "x": -0.16, "y": 1310.1 }
+],
+"slots": [
+	{ "name": "background", "bone": "root", "attachment": "background" },
+	{ "name": "leaves", "bone": "leaves", "attachment": "leaves" },
+	{ "name": "logo", "bone": "logo", "attachment": "logo" },
+	{ "name": "play", "bone": "play", "color": "fff99dff", "attachment": "play" },
+	{ "name": "quit", "bone": "quit", "color": "fff99dff", "attachment": "quit" },
+	{ "name": "settings", "bone": "settings", "color": "fff99dff", "attachment": "settings" }
+],
+"skins": {
+	"default": {
+		"background": {
+			"background": { "y": 526.31, "width": 1680, "height": 1050 }
+		},
+		"leaves": {
+			"leaves": { "y": -28.54, "width": 1042, "height": 522 }
+		},
+		"logo": {
+			"logo": { "y": -20.39, "width": 917, "height": 323 }
+		},
+		"play": {
+			"play": { "width": 218, "height": 77 }
+		},
+		"quit": {
+			"quit": { "width": 216, "height": 77 }
+		},
+		"settings": {
+			"settings": { "width": 446, "height": 76 }
+		}
+	}
+}
+}
