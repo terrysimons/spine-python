@@ -69,17 +69,17 @@ class Skeleton(spine.Skeleton):
 
                     if xScale < 0:
                         flipX = True
-                        #xScale = int(math.abs(xScale))
+                        xScale = math.fabs(xScale)
                     if yScale < 0:
                         flipY = True
-                        #yScale = int(math.abs(yScale))
+                        yScale = math.fabs(yScale)
 
                     
                     texture.fill((slot.r, slot.g, slot.b, slot.a), None, pygame.BLEND_RGBA_MULT)
 
                     center = texture.get_rect().center                    
                     texture = pygame.transform.flip(texture, flipX, flipY)
-                    #texture = pygame.transform.smoothscale(texture, (int(math.fabs(xScale)), int(math.fabs(yScale))))
+                    texture = pygame.transform.smoothscale(texture, (int(texture.get_width() * xScale), int(texture.get_height() * yScale)))
                     texture = pygame.transform.rotozoom(texture, -rotation, 1)
 
                     # Center image
