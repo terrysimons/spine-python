@@ -105,14 +105,14 @@ class Skeleton(object):
         return -1
 
 
-    def setSkinByName(self, skinName):
-        skin = data.findSkin(skinName)
+    def setSkin(self, skinName):
+        skin = self.data.findSkin(skinName)
         if not skin:
             raise Exception('Skin not found: %s' % skinName)
-        self.setSkin(skin)
+        self.setSkinToSkin(skin)
 
 
-    def setSkinBySkin(self, newSkin):
+    def setSkinToSkin(self, newSkin):
         if self.skin and newSkin:
             newSkin.attachAll(self, self.skin)
         self.skin = newSkin
@@ -128,7 +128,7 @@ class Skeleton(object):
             if attachment:
                 return attachment
         if self.skin:
-            return self.skin.getAttachmentByIndex(slotIndex, attachmentName)
+            return self.skin.getAttachment(slotIndex, attachmentName)
         return None
 
 

@@ -8,36 +8,36 @@ class SkeletonData(object):
 
         
     def findBone(self, boneName):
-        for i in range(len(self.bones)):
-            if self.bones[i].name == boneName:
-                return self.bones[i]
+        for i, bone in enumerate(self.bones):
+            if bone.name == boneName:
+                return bone
         return None
 
 
     def findBoneIndex(self, boneName):
-        for i in range(len(self.bones)):
-            if self.bones[i].name == boneName:
+        for i, bone in enumerate(self.bones):
+            if bone.name == boneName:
                 return i
         return -1
 
 
     def findSlot(self, slotName):
-        for i in range(len(self.slots)):
-            if self.slots[i].name == slotName:
-                return self.slots[i]
+        for i, slot in enumerate(self.slots):
+            if slot.name == slotName:
+                return slot
         return None
 
     
     def findSlotIndex(self, slotName):
-        for i in range(len(self.slots)):
-            if self.slots[i].name == slotName:
+        for i, slot in enumerate(self.slots):
+            if slot.name == slotName:
                 return i
         return -1
 
 
     def findSkin(self, skinName):
-        for i in range(len(self.skins)):
-            if self.skins[i].name == skinName:
-                return skins[i]
+        for i, skin in enumerate(self.skins):
+            if skin.name == skinName:
+                return skin
         return None
     
