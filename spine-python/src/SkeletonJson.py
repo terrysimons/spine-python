@@ -46,7 +46,7 @@ class SkeletonJson(object):
  
         skeletonData = SkeletonData.SkeletonData()
                 
-        for boneMap in root['bones']:
+        for boneMap in root.get('bones', []):
             boneData = BoneData.BoneData(name=boneMap['name'])
 
             if 'parent' in boneMap:
@@ -62,7 +62,7 @@ class SkeletonJson(object):
             boneData.scaleY = float(boneMap.get('scaleY', 1.0))
             skeletonData.bones.append(boneData)
 
-        for slotMap in root['slots']:
+        for slotMap in root.get('slots', []):
             slotName = slotMap['name']
             boneName = slotMap['bone']
             boneData = skeletonData.findBone(boneName)
@@ -83,51 +83,47 @@ class SkeletonJson(object):
             
             skeletonData.slots.append(slotData)
             
-        if 'skins' in root:
-            skinsMap = root['skins']
-            for skinName in skinsMap.keys():
-                skin = Skin.Skin(skinName)
-                skeletonData.skins.append(skin)
-                if skinName == 'default':
-                    skeletonData.defaultSkin = skin
+        skinsMap = root.get('skins', {})
+        for skinName in skinsMap.keys():
+            skin = Skin.Skin(skinName)
+            skeletonData.skins.append(skin)
+            if skinName == 'default':
+                skeletonData.defaultSkin = skin
 
-                slotMap = skinsMap[skinName]
-                for slotName in slotMap.keys():
-                    slotIndex = skeletonData.findSlotIndex(slotName)
+            slotMap = skinsMap[skinName]
+            for slotName in slotMap.keys():
+                slotIndex = skeletonData.findSlotIndex(slotName)
 
-                    attachmentsMap = slotMap[slotName]
-                    for attachmentName in attachmentsMap.keys():
-                        attachmentMap = attachmentsMap[attachmentName]
+                attachmentsMap = slotMap[slotName]
+                for attachmentName in attachmentsMap.keys():
+                    attachmentMap = attachmentsMap[attachmentName]
                         
-                        type = None
+                    type = None
 
-                        typeString = attachmentMap.get('type', 'region')
+                    typeString = attachmentMap.get('type', 'region')
 
-                        if typeString == 'region':
-                            type = AttachmentLoader.AttachmentType.region
-                        elif typeString == 'regionSequence':
-                            type = AttachmentLoader.AttachmentType.regionSequence
-                        else:
-                            raise Exception('Unknown attachment type: %s (%s)' % (attachment['type'],
+                    if typeString == 'region':
+                        type = AttachmentLoader.AttachmentType.region
+                    elif typeString == 'regionSequence':
+                        type = AttachmentLoader.AttachmentType.regionSequence
+                    else:
+                        raise Exception('Unknown attachment type: %s (%s)' % (attachment['type'],
                                                                                   attachmentName))
 
-                        attachment = self.attachmentLoader.newAttachment(type, 
-                                                                         attachmentMap.get('name', attachmentName))
+                    attachment = self.attachmentLoader.newAttachment(type, 
+                                                                     attachmentMap.get('name', attachmentName))
 
-                        if type == AttachmentLoader.AttachmentType.region or type == AttachmentLoader.AttachmentType.regionSequence:
-                            regionAttachment = attachment
-                            regionAttachment.name = attachmentName
-                            regionAttachment.x = float(attachmentMap.get('x', 0.0)) * self.scale
-                            regionAttachment.y = float(attachmentMap.get('y', 0.0)) * self.scale
-                            regionAttachment.scaleX = float(attachmentMap.get('scaleX', 1.0))
-                            regionAttachment.scaleY = float(attachmentMap.get('scaleY', 1.0))
-                            regionAttachment.rotation = float(attachmentMap.get('rotation', 0.0))
-                            regionAttachment.width = float(attachmentMap.get('width', 32)) * self.scale
-                            regionAttachment.height = float(attachmentMap.get('height', 32)) * self.scale
-
-
-                        skin.addAttachment(slotIndex, attachmentName, attachment)
-
+                    if type == AttachmentLoader.AttachmentType.region or type == AttachmentLoader.AttachmentType.regionSequence:
+                        regionAttachment = attachment
+                        regionAttachment.name = attachmentName
+                        regionAttachment.x = float(attachmentMap.get('x', 0.0)) * self.scale
+                        regionAttachment.y = float(attachmentMap.get('y', 0.0)) * self.scale
+                        regionAttachment.scaleX = float(attachmentMap.get('scaleX', 1.0))
+                        regionAttachment.scaleY = float(attachmentMap.get('scaleY', 1.0))
+                        regionAttachment.rotation = float(attachmentMap.get('rotation', 0.0))
+                        regionAttachment.width = float(attachmentMap.get('width', 32)) * self.scale
+                        regionAttachment.height = float(attachmentMap.get('height', 32)) * self.scale                        
+                    skin.addAttachment(slotIndex, attachmentName, attachment)
 
         return skeletonData
 
@@ -147,9 +143,9 @@ class SkeletonJson(object):
         
         root = json.loads(jsonPayload)
 
-        bones = root['bones']
+        bones = root.get('bones', {})
 
-        for boneName in root['bones'].keys():
+        for boneName in bones.keys():
             boneIndex = skeletonData.findBoneIndex(boneName)
             if boneIndex == -1:
                 raise Exception('Bone not found: %s' % boneName)
@@ -198,9 +194,9 @@ class SkeletonJson(object):
                     raise Exception('Invalid timeline type for a bone: %s (%s)' % (timelineName, boneName))
 
 
-        slots = root['slots']
+        slots = root.get('slots', {})
 
-        for slotName in root['slots'].keys():
+        for slotName in slots.keys():
             slotIndex = skeletonData.findSlotIndex(slotName)
             if slotIndex == -1:
                 raise Exception('Slot not found: %s' % slotName)
