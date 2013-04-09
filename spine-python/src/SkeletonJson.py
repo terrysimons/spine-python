@@ -1,4 +1,6 @@
 import json
+import os
+import sys
 
 import SkeletonData
 import BoneData
@@ -32,17 +34,27 @@ class SkeletonJson(object):
         self.scale = 1.0
         self.flipY = False            
 
+    def readSkeletonDataFile(self, file, path=None):
+        if path:
+           file = '{path}/{file}'.format(path=path, file=file)
 
-    def readSkeletonData(self, file):
-        jsonPayload = None
+        file = os.path.realpath(file)
 
-        if '{' in file:
-            jsonPayload = file
-        else:
-            with open(file, 'r') as jsonFile:
-                jsonPayload = ''.join(jsonFile.readlines())
+        jasonPayload = None
 
-        root = json.loads(jsonPayload)
+        with open(file, 'r') as jsonFile:
+            jsonPayload = ''.join(jsonFile.readlines())
+
+        return self.readSkeletonData(jsonPayload=jsonPayload)
+
+
+    def readSkeletonData(self, jsonPayload):
+        try:
+            root = json.loads(jsonPayload)
+        except ValueError:
+            if os.path.isfile(jsonPayload):
+                print('The API has changed.  You need to load skeleton data with readSkeletonDataFile(), not readSkeletonData()')
+                sys.exit()
  
         skeletonData = SkeletonData.SkeletonData()
                 
@@ -125,23 +137,23 @@ class SkeletonJson(object):
                         regionAttachment.height = float(attachmentMap.get('height', 32)) * self.scale                        
                     skin.addAttachment(slotIndex, attachmentName, attachment)
 
+        animations = root.get('animations', {})
+        for animationName in animations:
+            animationMap = animations.get(animationName, {})
+            animationData = self.readAnimation(name=animationName, 
+                                               root=animationMap, 
+                                               skeletonData=skeletonData)
+            skeletonData.animations.append(animationData)
+
         return skeletonData
 
  
-    def readAnimation(self, file, skeletonData):
-        if '{' in file:
-            jsonPayload = file
-        else:
-            with open(file, 'r') as jsonFile:
-                jsonPayload = ''.join(jsonFile.readlines())
-
+    def readAnimation(self, name, root, skeletonData):
         if not skeletonData:
             raise Exception('skeletonData cannot be null.')
 
         timelines =  []
         duration = 0.0
-        
-        root = json.loads(jsonPayload)
 
         bones = root.get('bones', {})
 
@@ -228,8 +240,8 @@ class SkeletonJson(object):
                     
                     keyframeIndex = 0
                     for valueMap in values:
-                        name = valueMap['name']
-                        timeline.setKeyframe(keyframeIndex, valueMap['time'], '' if not name else name)
+                        valueName = valueMap['name']
+                        timeline.setKeyframe(keyframeIndex, valueMap['time'], '' if not valueName else valueName)
                         keyframeIndex += 1
                     timelines.append(timeline)
                     if timeline.getDuration > duration:
@@ -237,8 +249,7 @@ class SkeletonJson(object):
                 else:
                     raise Exception('Invalid timeline type for a slot: %s (%s)' % (timelineName, slotName))
 
-
-        animation = Animation.Animation(timelines, duration)
+        animation = Animation.Animation(name, timelines, duration)
         return animation
                         
                 

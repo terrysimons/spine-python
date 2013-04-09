@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='spine-python',
-      version='1.0b6',
+      version='1.0b7',
       description='A Pure Python Spine runtime.',
       author='Terry Simons',
       author_email='terry.simons@gmail.com',

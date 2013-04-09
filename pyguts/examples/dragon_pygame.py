@@ -16,20 +16,13 @@ if __name__ == '__main__':
     caption = 'PyGuts - A Pygame front-end based on the python-spine Runtime'
     pygame.display.set_caption(caption, 'Spine Runtime')
 
-    atlasFile = os.path.realpath('./data/dragon.atlas')
-    atlas = spine.Atlas(file=atlasFile)
-
+    atlas = spine.Atlas(file='./data/dragon.atlas')
     skeletonJson = spine.SkeletonJson(spine.AtlasAttachmentLoader(atlas))
-
-    skeletonFile = os.path.realpath('./data/dragon-skeleton.json')
-    skeletonData = skeletonJson.readSkeletonData(skeletonFile)
-
-    animationFile = os.path.realpath('./data/dragon-flying.json')
-    animation = skeletonJson.readAnimation(file=animationFile, 
-                                           skeletonData=skeletonData)       
+    skeletonData = skeletonJson.readSkeletonDataFile('./data/dragon.json')
+    flyingAnimation = skeletonData.findAnimation('flying')
 
     skeleton = spine.Skeleton(skeletonData=skeletonData)
-    skeleton.debug = True
+    skeleton.debug = False
 
     skeleton.setToBindPose()
     skeleton.x = 480
@@ -53,9 +46,9 @@ if __name__ == '__main__':
                     done = True
         clock.tick(0)
         animationTime += clock.get_time() / 1000.0
-        animation.apply(skeleton=skeleton,
-                        time=animationTime,
-                        loop=True)
+        flyingAnimation.apply(skeleton=skeleton,
+                              time=animationTime,
+                              loop=True)
         skeleton.updateWorldTransform()
         screen.fill((0, 0, 0))
         skeleton.draw(screen, 0)

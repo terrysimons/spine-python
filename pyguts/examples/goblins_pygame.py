@@ -16,17 +16,10 @@ if __name__ == '__main__':
     caption = 'PyGuts - A Pygame front-end based on the python-spine Runtime'
     pygame.display.set_caption(caption, 'Spine Runtime')
 
-    atlasFile = os.path.realpath('./data/goblins.atlas')
-    atlas = spine.Atlas(file=atlasFile)
-
+    atlas = spine.Atlas(file='./data/goblins.atlas')
     skeletonJson = spine.SkeletonJson(spine.AtlasAttachmentLoader(atlas))
-
-    skeletonFile = os.path.realpath('./data/goblins-skeleton.json')
-    skeletonData = skeletonJson.readSkeletonData(skeletonFile)
-
-    animationFile = os.path.realpath('./data/goblins-walk.json')
-    animation = skeletonJson.readAnimation(file=animationFile, 
-                                           skeletonData=skeletonData)
+    skeletonData = skeletonJson.readSkeletonDataFile('./data/goblins.json')
+    walkAnimation = skeletonData.findAnimation('walk')
 
     goblin = spine.Skeleton(skeletonData=skeletonData)
     goblin.debug = True
@@ -65,12 +58,12 @@ if __name__ == '__main__':
                     done = True
         clock.tick(0)
         animationTime += clock.get_time() / 1000.0
-        animation.apply(skeleton=goblin,
-                        time=animationTime,
-                        loop=True)
-        animation.apply(skeleton=goblingirl,
-                        time=animationTime,
-                        loop=True)
+        walkAnimation.apply(skeleton=goblin,
+                            time=animationTime,
+                            loop=True)
+        walkAnimation.apply(skeleton=goblingirl,
+                            time=animationTime,
+                            loop=True)
         goblin.updateWorldTransform()
         goblingirl.updateWorldTransform()
         screen.fill((0, 0, 0))

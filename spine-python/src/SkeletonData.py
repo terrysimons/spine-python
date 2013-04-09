@@ -4,6 +4,7 @@ class SkeletonData(object):
         self.bones = []
         self.slots = []
         self.skins = []
+        self.animations = []
         self.defaultSkin = None
 
         
@@ -41,3 +42,9 @@ class SkeletonData(object):
                 return skin
         return None
     
+
+    def findAnimation(self, animationName):
+        for i, animation in enumerate(self.animations):
+            if animation.name == animationName:
+                return animation
+        return None

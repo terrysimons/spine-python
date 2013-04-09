@@ -16,21 +16,11 @@ if __name__ == '__main__':
     caption = 'PyGuts - A Pygame front-end based on the python-spine Runtime'
     pygame.display.set_caption(caption, 'Spine Runtime')
 
-    atlasFile = os.path.realpath('./data/spineboy2.atlas')
-    atlas = spine.Atlas(file=atlasFile)
-
+    atlas = spine.Atlas(file='./data/spineboy.atlas')
     skeletonJson = spine.SkeletonJson(spine.AtlasAttachmentLoader(atlas))
-
-    skeletonFile = os.path.realpath('./data/spineboy2-skeleton.json')
-    skeletonData = skeletonJson.readSkeletonData(skeletonFile)
-
-    animationFile = os.path.realpath('./data/spineboy2-walk.json')
-    walkAnimation = skeletonJson.readAnimation(file=animationFile, 
-                                               skeletonData=skeletonData)       
-
-    animationFile = os.path.realpath('./data/spineboy2-jump.json')
-    jumpAnimation = skeletonJson.readAnimation(file=animationFile, 
-                                               skeletonData=skeletonData)       
+    skeletonData = skeletonJson.readSkeletonDataFile(file='./data/spineboy.json')
+    walkAnimation = skeletonData.findAnimation('walk')
+    jumpAnimation = skeletonData.findAnimation('jump')
 
     skeleton = spine.Skeleton(skeletonData=skeletonData)
     skeleton.debug = True

@@ -1,9 +1,10 @@
 import Timeline
 
 class Animation(object):
-    def __init__(self, timelines, duration):
+    def __init__(self, name, timelines, duration):
         if not timelines: 
             raise Exception('Timelines cannot be None.')
+        self.name = name
         self.timelines = timelines
         self.duration = duration
 
