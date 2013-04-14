@@ -23,10 +23,12 @@ class CurveTimeline(Timeline):
 
     def setLinear(self, keyframeIndex):
         self.curves[keyframeIndex * self.FRAME_SPACING] = self.LINEAR
+        self.curves[keyframeIndex * 6] = self.LINEAR
 
 
     def setStepped(self, keyframeIndex):
         self.curves[keyframeIndex * self.FRAME_SPACING] = self.STEPPED
+        self.curves[keyframeIndex * 6] = self.STEPPED
 
     
     def setCurve(self, keyframeIndex, cx1, cy1, cx2, cy2):
@@ -52,6 +54,7 @@ class CurveTimeline(Timeline):
 
     def getCurvePercent(self, keyframeIndex, percent):
         curveIndex = keyframeIndex * self.FRAME_SPACING
+        curveIndex = keyframeIndex * 6
         dfx = self.curves[curveIndex]
         if dfx == self.LINEAR:
             return percent

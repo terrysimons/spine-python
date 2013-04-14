@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='pyguts',
-      version='1.0b13',
+      version='1.0b14',
       description='A pygame front-end for spine-python.',
       author='Terry Simons',
       author_email='terry.simons@gmail.com',

@@ -15,6 +15,8 @@ class Animation(object):
 
         if loop and duration:
             time = time % duration
+        if loop and self.duration:
+            time = time % self.duration
 
         for timeline in self.timelines:
             timeline.apply(skeleton, time, alpha)
