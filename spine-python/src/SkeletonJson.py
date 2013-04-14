@@ -16,10 +16,9 @@ def readCurve(timeline, keyframeIndex, valueMap):
         curve = valueMap['curve']
     except KeyError:
         return timeline
-    if type(curve) == type('') and curve == 'stepped':
+
     if curve == 'stepped':
         timeline.setStepped(keyframeIndex)
-    elif type(curve) == type([]):
     else:
         timeline.setCurve(keyframeIndex, 
                           float(curve[0]), 
